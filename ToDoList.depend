@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1732213655 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\app.cpp
+	"App.h"
+	"Main.h"
+	<wx/wx.h>
+
+1732209654 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\app.h
+	<wx/wx.h>
+
+1732808630 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\main.h
+	<wx/wx.h>
+	<wx/list.h>
+	<string>
+
+1732225242 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass.cpp
+	<iostream>
+	<string>
+
+1732225527 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass.cpp
+
+1732225636 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass.h
+	<iostream>
+	<string>
+
+1732810376 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\main.cpp
+	"Main.h"
+	<wx/wx.h>
+	<wx/list.h>
+	<fstream>
+	<string>
+

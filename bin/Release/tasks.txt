@@ -1,6 +1,0 @@
-widgets = apo string se class
-vs code gia css
-github setup
-gumnastikh
-kegels
-forma gia to bridge

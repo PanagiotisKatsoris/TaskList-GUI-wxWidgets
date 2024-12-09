@@ -30,6 +30,8 @@
 		<Unit filename="App.h" />
 		<Unit filename="Main.cpp" />
 		<Unit filename="Main.h" />
+		<Unit filename="TaskClass1.cpp" />
+		<Unit filename="TaskClass1.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -12,7 +12,6 @@ class Main:public wxFrame
     protected:
 
     private:
-        //std::vector<std::string> taskList2;
         wxList* taskList;
         wxTextCtrl* inputField;
         wxListBox* listBox;
@@ -22,5 +21,10 @@ class Main:public wxFrame
         void ClearTasks(wxCommandEvent& evt);
         void DeleteSelection(wxCommandEvent& evt);
 };
+
+bool containsUnderscore(const wxString& str)
+{
+
+}
 
 #endif // MAIN_H

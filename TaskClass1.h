@@ -11,10 +11,10 @@ class TaskClass1
     public:
         TaskClass1(const std::string& taskNameIn, const std::array<int, 3>& dateIn);
         virtual ~TaskClass1();
-        std::string getName();
-        int getDay();
-        int getMonth();
-        int getYear();
+        std::string getName() const;
+        int getDay() const;
+        int getMonth() const;
+        int getYear() const;
 
     protected:
 

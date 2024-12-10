@@ -12,22 +12,22 @@ TaskClass1::TaskClass1(const std::string& taskNameIn, const std::array<int, 3>& 
 
 }
 
-std::string TaskClass1::getName() //return the underscore version of task name
+std::string TaskClass1::getName() const//return the underscore version of task name
 {
     return taskName;
 }
 
-int TaskClass1::getDay() //return day
+int TaskClass1::getDay() const//return day
 {
     return date[0];
 }
 
-int TaskClass1::getMonth() //return month
+int TaskClass1::getMonth() const//return month
 {
     return date[1];
 }
 
-int TaskClass1::getYear() //return year
+int TaskClass1::getYear() const//return year
 {
     return date[2];
 }

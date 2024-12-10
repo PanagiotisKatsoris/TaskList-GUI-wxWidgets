@@ -7,10 +7,13 @@
 1732209654 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\app.h
 	<wx/wx.h>
 
-1732808630 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\main.h
+1733861399 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\main.h
 	<wx/wx.h>
 	<wx/list.h>
 	<string>
+	<vector>
+	<array>
+	"TaskClass1.h"
 
 1732225242 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass.cpp
 	<iostream>
@@ -28,4 +31,17 @@
 	<wx/list.h>
 	<fstream>
 	<string>
+
+1733854627 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass1.h
+	<iostream>
+	<string>
+	<array>
+	<algorithm>
+
+1733854650 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass1.cpp
+	"TaskClass1.h"
+	<iostream>
+	<string>
+	<array>
+	<algorithm>
 

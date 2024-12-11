@@ -30,7 +30,7 @@ decide if we need wxList or not so that i can delete that line
 format comments to be more descreptive for following lines instead of simple comment on each line
 add function for choosing date for current task (incorporates the checkbox otherwise is forced and checkbox is out
 */
-
+push_back
 bool containsUnderscore(const wxString& str)
 {
     return str.Find('_') != wxNOT_FOUND;
@@ -90,7 +90,7 @@ Main::Main(const wxString& title):wxFrame(nullptr, wxID_ANY, title, wxDefaultPos
             tempDateTemplate[0] = num1;
             tempDateTemplate[1] = num2;
             tempDateTemplate[2] = num3;
-            taskObjects.push_back(TaskClass1(tasktemp, tempDateTemplate));
+            taskObjects.emplace_back(tasktemp, tempDateTemplate);
         }
     file2.close();
 
@@ -122,7 +122,7 @@ void Main::OnTextEnter(wxCommandEvent&)
             file << str << std::endl;
         file.close();
         std::string stdStr = str.ToStdString();
-        taskObjects.push_back(TaskClass1(stdStr, tempDateTemplate));//adds obj to vector
+        taskObjects.emplace_back(stdStr, tempDateTemplate);//adds obj to vector
         std::ofstream file2("task_objects.txt", std::ios::app);//adds latest obj in file
             std::string temp;
             temp = (taskObjects.back()).getName() + ' ' + std::to_string((taskObjects.back()).getDay()) + ' ' +

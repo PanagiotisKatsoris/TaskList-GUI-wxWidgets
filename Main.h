@@ -3,9 +3,7 @@
 #include <wx/wx.h>
 #include <wx/list.h>
 #include <string>
-#include <vector>
 #include <array>
-#include "TaskClass1.h"
 
 class Main:public wxFrame
 {
@@ -26,7 +24,5 @@ class Main:public wxFrame
 };
 
 bool containsUnderscore(const wxString& str);
-std::vector<TaskClass1> taskObjects;
-std::array<int, 3> tempDateTemplate;
 
 #endif // MAIN_H

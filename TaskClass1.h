@@ -4,6 +4,7 @@
 #include <string>
 #include <array>
 #include <algorithm>
+#include <vector>
 
 
 class TaskClass1
@@ -23,5 +24,8 @@ class TaskClass1
     std::array<int, 3> date = {01, 01, 1970};
 
 };
+
+extern std::vector<TaskClass1> taskObjects;
+extern std::array<int, 3> tempDateTemplate;
 
 #endif // TASKCLASS1_H

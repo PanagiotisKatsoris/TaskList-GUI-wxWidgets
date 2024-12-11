@@ -1,5 +1,6 @@
 #include "App.h"
 #include "Main.h"
+#include "TaskClass1.h"
 #include <wx/wx.h>
 
 bool App::OnInit()

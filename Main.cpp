@@ -19,15 +19,16 @@ add button
 listbox with task names
 delete button
 clear button
-TODO:
 create a class to make objects that contain name and date for tasks
 implement task class
+delete selection for objects
+TODO:
 add edit function for date of a task
-add edit function for name of task ( probably would require object deletion and new object creation )
+add edit function for name of task
 learn sizebox to make the window resizable
 decide if we need wxList or not so that i can delete that line
 format comments to be more descreptive for following lines instead of simple comment on each line
-delete selection for objects
+add function for choosing date for current task (incorporates the checkbox otherwise is forced and checkbox is out
 */
 
 bool containsUnderscore(const wxString& str)
@@ -73,8 +74,10 @@ Main::Main(const wxString& title):wxFrame(nullptr, wxID_ANY, title, wxDefaultPos
             listBox->Append(wxString(line));
         }
     file.close();
-    std::vector<TaskClass1> taskObjects;// a vector to keep objects of taskclass
-    std::array<int, 3> tempDateTemplate = {1, 1, 1970};//temp date array until input of date is implemented
+    //std::vector<TaskClass1> taskObjects;// a vector to keep objects of taskclass
+        tempDateTemplate[0] = 1;
+        tempDateTemplate[1] = 1;
+        tempDateTemplate[2] = 1970;
     //here will be ifstream from task_objects.txt but it needs to have each line iterated and split into a string for name and three ints that will fill a date array
     std::ifstream file2("task_objects.txt");
         std::string line2;
@@ -103,11 +106,12 @@ void Main::MousePos(wxMouseEvent& evt)//this is a method to return mouse positio
     wxString str = wxString::Format("x=  %d  y= %d", mouseP.x, mouseP.y);
     wxLogStatus(str);
 }
-void Main::OnTextEnter(wxCommandEvent&)//method that adds typed text in listbox and clears textctrl. adds task to external file and creates object and puts it to file. checks for unwanted underscores and unwanted empty text
+//this method grabs the text in the input field and creates a new item in a listbox visible to the user, adds same text on a tasks.txt file and creates on object which contains date for the item also saved on a task_objects.txt
+void Main::OnTextEnter(wxCommandEvent&)
 {
     wxString str = inputField->GetValue();
     if (containsUnderscore(str)){//underscores are not allowed to avoid crashes. might get fixed at later date. this would require a different way of using the taskclass
-        wxMessageBox("Task name contains underscore(s) '_', which is not allowed in the current version of this app. Please delete the underscore(s) and proceed.", "Warning",
+        wxMessageBox("Task name contains underscore(s) '_', which is not allowed in the current version of this app. Please delete any underscore(s) and proceed.", "Warning",
                      wxOK | wxICON_WARNING, this);
         return;
     }
@@ -118,7 +122,7 @@ void Main::OnTextEnter(wxCommandEvent&)//method that adds typed text in listbox 
             file << str << std::endl;
         file.close();
         std::string stdStr = str.ToStdString();
-        taskObjects.push_back(TaskClass1(stdStr, tempDateTemplate));
+        taskObjects.push_back(TaskClass1(stdStr, tempDateTemplate));//adds obj to vector
         std::ofstream file2("task_objects.txt", std::ios::app);//adds latest obj in file
             std::string temp;
             temp = (taskObjects.back()).getName() + ' ' + std::to_string((taskObjects.back()).getDay()) + ' ' +
@@ -128,17 +132,20 @@ void Main::OnTextEnter(wxCommandEvent&)//method that adds typed text in listbox 
 
     }
 }
+//mass deletion of tasks on listbox, objects, and ext txt files
 void Main::ClearTasks(wxCommandEvent& evt)
 {
     listBox->Clear();
-    std::ofstream file("tasks.txt");//overwrites file with empty one. another way is the parameter std::ios::trunc
+    taskObjects.clear();
+    std::ofstream file("tasks.txt");//another way is the parameter std::ios::trunc
         file << "";
     file.close();
     std::ofstream file2("task_objects.txt");
         file << "";
     file.close();
 }
-void Main::DeleteSelection(wxCommandEvent& evt)//-----task object deletion not implemented!!!------
+//selected tasks from the list will be deleted from the listbox and the vector and txt files wil be updated.
+void Main::DeleteSelection(wxCommandEvent& evt)
 {
     wxArrayInt selections;
     listBox->GetSelections(selections);
@@ -147,15 +154,35 @@ void Main::DeleteSelection(wxCommandEvent& evt)//-----task object deletion not i
         wxMessageBox("No tasks were selected", "Error", wxOK | wxICON_WARNING, this);//if button is pressed without any selections
         return;
     }
-    for (int i = selections.GetCount() - 1; i >= 0; --i)//deletes selections from bottom up
+    for (int i = selections.GetCount() - 1; i >= 0; --i)//deletes selections from bottom up in listbox and in vector
     {
+        std::string str = listBox->GetString(selections[i]).ToStdString();
+        std::replace(str.begin(), str.end(), ' ', '_');
+        for(auto it = taskObjects.begin(); it != taskObjects.end(); )
+        {
+            if (str == it->getName())
+            {
+                it = taskObjects.erase(it);
+            }
+            else {
+                ++it;
+            }
+        }
         listBox->Delete(selections[i]);
     }
+    //after the deletion in listbox and in the vector, the txt files are updated by being overwritten with the new listbox items and vector objects accordingly
     std::ofstream file("tasks.txt");
-        for (size_t i = 0; i < listBox->GetCount(); ++i)// after listbox is updated after deletion this just overwrites the txt file with a new one containing items only in the updated listbox
+        for (size_t i = 0; i < listBox->GetCount(); ++i)
         {
             file << listBox->GetString(i).ToStdString() << std::endl;
         }
     file.close();
+    std::ofstream file2("task_objects.txt");
+        for (const auto& task : taskObjects)
+        {
+            std::string tempLooped = (task.getName() + ' ' + std::to_string(task.getDay()) + ' ' + std::to_string(task.getMonth()) + ' ' + std::to_string(task.getYear()));
+            file2 << tempLooped << std::endl;
+        }
+    file2.close();
     wxMessageBox("Tasks Deleted", "Complete", wxOK | wxICON_INFORMATION, this);
 }

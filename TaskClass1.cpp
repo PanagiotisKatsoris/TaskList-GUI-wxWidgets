@@ -36,3 +36,5 @@ TaskClass1::~TaskClass1()
 {
     //destructor
 }
+std::vector<TaskClass1> taskObjects;
+std::array<int, 3> tempDateTemplate;

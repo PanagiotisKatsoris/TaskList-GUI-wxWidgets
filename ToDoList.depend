@@ -1,19 +1,18 @@
 # depslib dependency file v1.0
-1732213655 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\app.cpp
+1733913210 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\app.cpp
 	"App.h"
 	"Main.h"
+	"TaskClass1.h"
 	<wx/wx.h>
 
 1732209654 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\app.h
 	<wx/wx.h>
 
-1733861399 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\main.h
+1733914005 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\main.h
 	<wx/wx.h>
 	<wx/list.h>
 	<string>
-	<vector>
 	<array>
-	"TaskClass1.h"
 
 1732225242 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass.cpp
 	<iostream>
@@ -25,20 +24,27 @@
 	<iostream>
 	<string>
 
-1732810376 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\main.cpp
+1733914205 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\main.cpp
 	"Main.h"
+	"TaskClass1.h"
 	<wx/wx.h>
 	<wx/list.h>
 	<fstream>
-	<string>
-
-1733854627 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass1.h
 	<iostream>
 	<string>
 	<array>
 	<algorithm>
+	<vector>
+	<sstream>
 
-1733854650 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass1.cpp
+1733914354 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass1.h
+	<iostream>
+	<string>
+	<array>
+	<algorithm>
+	<vector>
+
+1733914419 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass1.cpp
 	"TaskClass1.h"
 	<iostream>
 	<string>

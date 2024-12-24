@@ -3,14 +3,9 @@
 #include <string>
 #include <array>
 #include <algorithm>
+#include <map>
 
-TaskClass1::TaskClass1(const std::string& taskNameIn, const std::array<int, 3>& dateIn) //constructor for class object with same name variable which replaces white space with underscore and adds array with date
-{
-    date = dateIn;
-    taskName = taskNameIn;
-    std::replace(taskName.begin(), taskName.end(), ' ', '_');
-
-}
+TaskClass1::TaskClass1(const std::string& taskNameIn, const std::array<int, 3>& dateIn) : taskName(taskNameIn), date(dateIn) {}//constructor for class object with same name variable which replaces white space with underscore and adds array with date
 
 std::string TaskClass1::getName() const//return the underscore version of task name
 {
@@ -36,5 +31,6 @@ TaskClass1::~TaskClass1()
 {
     //destructor
 }
-std::vector<TaskClass1> taskObjects;
+std::list<TaskClass1> taskObjects;
 std::array<int, 3> tempDateTemplate;
+std::map<std::string, std::list<TaskClass1>::iterator> taskMap;

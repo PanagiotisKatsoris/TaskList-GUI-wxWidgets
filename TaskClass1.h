@@ -4,7 +4,8 @@
 #include <string>
 #include <array>
 #include <algorithm>
-#include <vector>
+#include <list>
+#include <map>
 
 
 class TaskClass1
@@ -25,7 +26,8 @@ class TaskClass1
 
 };
 
-extern std::vector<TaskClass1> taskObjects;
+extern std::list<TaskClass1> taskObjects;
 extern std::array<int, 3> tempDateTemplate;
-
+extern std::map<std::string, std::list<TaskClass1>::iterator> taskMap;
 #endif // TASKCLASS1_H
+

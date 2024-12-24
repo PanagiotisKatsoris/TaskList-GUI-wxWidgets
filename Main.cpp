@@ -7,8 +7,9 @@
 #include <string>
 #include <array>
 #include <algorithm>
-#include <vector>
+#include <list>
 #include <sstream>
+#include <map>
 /*
 hello, this is a gui application used for storing tasks. think of it like a list one would write task they would want to complete in order to remember them.
 each task is also associated with a date.i will now write things i want this program to do once finished and things i have already implemented from that list.
@@ -30,7 +31,7 @@ decide if we need wxList or not so that i can delete that line
 format comments to be more descreptive for following lines instead of simple comment on each line
 add function for choosing date for current task (incorporates the checkbox otherwise is forced and checkbox is out
 */
-push_back
+
 bool containsUnderscore(const wxString& str)
 {
     return str.Find('_') != wxNOT_FOUND;
@@ -66,6 +67,7 @@ Main::Main(const wxString& title):wxFrame(nullptr, wxID_ANY, title, wxDefaultPos
     clearButton->Bind(wxEVT_BUTTON, &Main::ClearTasks, this);
     deleteButton->Bind(wxEVT_BUTTON, &Main::DeleteSelection, this);
 //standards
+    //inserts from tasks.txt all tasks into listbox
     std::ifstream file("tasks.txt");
         std::string line;
         listBox->Clear();
@@ -74,11 +76,11 @@ Main::Main(const wxString& title):wxFrame(nullptr, wxID_ANY, title, wxDefaultPos
             listBox->Append(wxString(line));
         }
     file.close();
-    //std::vector<TaskClass1> taskObjects;// a vector to keep objects of taskclass
+        //adding temp valeus for array which is to be deleted after date insert function is implemented for user
         tempDateTemplate[0] = 1;
         tempDateTemplate[1] = 1;
         tempDateTemplate[2] = 1970;
-    //here will be ifstream from task_objects.txt but it needs to have each line iterated and split into a string for name and three ints that will fill a date array
+    //insert from task_objects.txt all objects into list
     std::ifstream file2("task_objects.txt");
         std::string line2;
         while(std::getline(file2, line2))
@@ -91,6 +93,7 @@ Main::Main(const wxString& title):wxFrame(nullptr, wxID_ANY, title, wxDefaultPos
             tempDateTemplate[1] = num2;
             tempDateTemplate[2] = num3;
             taskObjects.emplace_back(tasktemp, tempDateTemplate);
+            taskMap.insert({tasktemp, std::prev(taskObjects.end())});
         }
     file2.close();
 
@@ -122,7 +125,9 @@ void Main::OnTextEnter(wxCommandEvent&)
             file << str << std::endl;
         file.close();
         std::string stdStr = str.ToStdString();
-        taskObjects.emplace_back(stdStr, tempDateTemplate);//adds obj to vector
+        std::replace(stdStr.begin(), stdStr.end(), ' ', '_');
+        taskObjects.emplace_back(stdStr, tempDateTemplate);//adds obj to list
+        taskMap.insert({stdStr, std::prev(taskObjects.end())});
         std::ofstream file2("task_objects.txt", std::ios::app);//adds latest obj in file
             std::string temp;
             temp = (taskObjects.back()).getName() + ' ' + std::to_string((taskObjects.back()).getDay()) + ' ' +
@@ -137,6 +142,7 @@ void Main::ClearTasks(wxCommandEvent& evt)
 {
     listBox->Clear();
     taskObjects.clear();
+    taskMap.clear();
     std::ofstream file("tasks.txt");//another way is the parameter std::ios::trunc
         file << "";
     file.close();
@@ -144,7 +150,7 @@ void Main::ClearTasks(wxCommandEvent& evt)
         file << "";
     file.close();
 }
-//selected tasks from the list will be deleted from the listbox and the vector and txt files wil be updated.
+//selected tasks from the list will be deleted from the listbox and the list and txt files wil be updated.
 void Main::DeleteSelection(wxCommandEvent& evt)
 {
     wxArrayInt selections;
@@ -154,23 +160,16 @@ void Main::DeleteSelection(wxCommandEvent& evt)
         wxMessageBox("No tasks were selected", "Error", wxOK | wxICON_WARNING, this);//if button is pressed without any selections
         return;
     }
-    for (int i = selections.GetCount() - 1; i >= 0; --i)//deletes selections from bottom up in listbox and in vector
+    for (int i = selections.GetCount() - 1; i >= 0; --i)//deletes selections from bottom up in listbox and in list
     {
         std::string str = listBox->GetString(selections[i]).ToStdString();
         std::replace(str.begin(), str.end(), ' ', '_');
-        for(auto it = taskObjects.begin(); it != taskObjects.end(); )
-        {
-            if (str == it->getName())
-            {
-                it = taskObjects.erase(it);
-            }
-            else {
-                ++it;
-            }
-        }
+        auto it = taskMap.find(str);
+        taskObjects.erase(it->second);
+        taskMap.erase(str);
         listBox->Delete(selections[i]);
     }
-    //after the deletion in listbox and in the vector, the txt files are updated by being overwritten with the new listbox items and vector objects accordingly
+    //after the deletion in listbox and in the list, the txt files are updated by being overwritten with the new listbox items and list objects accordingly
     std::ofstream file("tasks.txt");
         for (size_t i = 0; i < listBox->GetCount(); ++i)
         {

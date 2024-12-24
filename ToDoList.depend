@@ -24,7 +24,7 @@
 	<iostream>
 	<string>
 
-1733914205 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\main.cpp
+1735044004 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\main.cpp
 	"Main.h"
 	"TaskClass1.h"
 	<wx/wx.h>
@@ -34,20 +34,23 @@
 	<string>
 	<array>
 	<algorithm>
-	<vector>
+	<list>
 	<sstream>
+	<map>
 
-1733914354 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass1.h
+1735043712 c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass1.h
 	<iostream>
 	<string>
 	<array>
 	<algorithm>
-	<vector>
+	<list>
+	<map>
 
-1733914419 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass1.cpp
+1735043727 source:c:\users\aekfc\onedrive\documents\c++programs\tasklistgui\taskclass1.cpp
 	"TaskClass1.h"
 	<iostream>
 	<string>
 	<array>
 	<algorithm>
+	<map>
 
